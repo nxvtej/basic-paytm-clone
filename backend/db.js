@@ -1,6 +1,3 @@
-import mongoose, { Mongoose } from "mongoose";
-import { boolean, number } from "zod";
-
 const mongoose = require("mongoose");
 mongoose.connect(
 	"mongodb+srv://nxvtej:Bqwl7q1N8WlrlMw4@cluster0.ccslg3a.mongodb.net/"
@@ -43,7 +40,7 @@ const accountSchema = new mongoose.Schema({
 		required: true,
 	},
 	balance: {
-		type: number,
+		type: Number,
 		required: true,
 	},
 });
