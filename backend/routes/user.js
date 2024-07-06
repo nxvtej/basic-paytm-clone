@@ -28,7 +28,7 @@ router.post("/signup", async (req, res) => {
 		username: body.username,
 	});
 
-	if (existingUser._id) {
+	if (existingUser) {
 		return res.status(411).json({
 			message: "Email already taken / Incorrect inputs",
 		});
@@ -47,7 +47,7 @@ router.post("/signup", async (req, res) => {
 	// signing jwt token
 	const token = jwt.sign(
 		{
-			userId: dbUser._id,
+			userId,
 		},
 		JWT_SECRET
 	);
@@ -103,6 +103,25 @@ const updateDb = zod.object({
 	password: zod.string().min(5),
 	firstName: zod.string(),
 	lastName: zod.string(),
+});
+
+// demo route to get user id by username
+router.get("/getid", async (req, res) => {
+	console.log("getid route hit");
+
+	const username = req.query.username;
+	console.log(username);
+	const user = await User.findOne(
+		{
+			username: username,
+		},
+		"_id"
+	);
+
+	return res.json({
+		message: "id found",
+		id: user._id,
+	});
 });
 
 router.put("/", authMiddleware, async (req, res) => {
