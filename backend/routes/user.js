@@ -153,7 +153,7 @@ router.put("/", authMiddleware, async (req, res) => {
 	}
 });
 
-router.get("/bulk", authMiddleware, async (req, res) => {
+router.get("/bulk", async (req, res) => {
 	console.log("bulk route hit");
 	const filter = req.query.filter || "";
 
